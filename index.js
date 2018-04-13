@@ -73,6 +73,7 @@ function PinoColada () {
     if (url != null) output.push(formatUrl(url))
     if (contentLength != null) output.push(formatBundleSize(contentLength))
     if (responseTime != null) output.push(formatLoadTime(responseTime))
+    output.push(formatExtra(obj))
 
     return output.filter(noEmpty).join(' ')
   }
@@ -107,12 +108,7 @@ function PinoColada () {
     if (obj.level === 'warn') return chalk.magenta(msg)
     if (obj.level === 'debug') return chalk.yellow(msg)
     if (obj.level === 'info' || obj.level === 'userlvl') return chalk.green(msg)
-    if (obj.level === 'fatal') {
-      var pretty = chalk.white.bgRed(msg)
-      return obj.stack
-        ? pretty + nl + obj.stack
-        : pretty
-    }
+    if (obj.level === 'fatal') return chalk.white.bgRed(msg)
   }
 
   function formatUrl (url) {
@@ -146,7 +142,50 @@ function PinoColada () {
     return message
   }
 
+  function formatExtra (obj) {
+    const pinoKeys = [
+      'level',
+      'time',
+      'msg',
+      'message',
+      'pid',
+      'hostname',
+      'name',
+      'ns',
+      'v',
+      'req',
+      'res',
+      'statusCode',
+      'responseTime',
+      'elapsed',
+      'method',
+      'contentLength',
+      'url'
+    ]
+
+    const extra = Object.keys(obj)
+      .filter(key => !pinoKeys.includes(key))
+      .reduce((acc, key) => {
+        acc[key] = obj[key]
+        return acc
+      }, {})
+
+    const extraKeys = Object.keys(extra)
+
+    if (extraKeys.length === 0) return ''
+
+    return nl + extraKeys.map(key => {
+      let val = extra[key]
+      if (isObject(val)) val = JSON.stringify(val, null, 2)
+      return chalk.gray(`${key}: ${val}`)
+    }).join(nl)
+  }
+
   function noEmpty (val) {
     return !!val
   }
+}
+
+function isObject (val) {
+  return val != null && typeof val === 'object' && Array.isArray(val) === false
 }

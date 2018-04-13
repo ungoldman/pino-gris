@@ -1,29 +1,25 @@
-var merry = require('merry')
-var http = require('http')
+var pino = require('pino')
 
-var notFound = merry.notFound
-var error = merry.error
-var app = merry()
+var log = pino({
+  name: 'test',
+  level: 'trace'
+})
 
-app.router([
-  [ '/', function (req, res, ctx, done) {
-    done(null, 'hello world')
-  }],
-  [ '/user', {
-    post: function (req, res, ctx, done) {
-      done(null, 'new user ✨')
-    }
-  }],
-  [ '/content', {
-    put: function (req, res, ctx, done) {
-      done(null, 'ou weee here is some updated info')
-    }
-  }],
-  [ '/error', function (req, res, ctx, done) {
-    done(error({ statusCode: 500, message: 'helloooo server error' }))
-  }],
-  [ '/404', notFound() ]
-])
-
-var server = http.createServer(app.start())
-server.listen(8080)
+log.fatal(new Error('Aaaaaauugh'), 'Someone is dead!')
+log.error(new Error('Perhaps we\'ll never know'), 'What really happened?')
+log.trace([
+  'Colonel Mustard',
+  'Miss Scarlet',
+  'Mr. Green',
+  'Mrs. Peacock',
+  'Mrs. White',
+  'Professor Plum'
+], 'Interrogating suspects')
+log.warn({
+  evidence: {
+    weapon: 'Candlestick',
+    location: 'Library',
+    suspect: 'Colonel Mustard'
+  }
+}, 'Gathering evidence')
+log.info({ justice: true }, 'Justice is served')
