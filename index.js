@@ -19,9 +19,9 @@ function isWideEmoji (character) {
   return character !== '⚠️'
 }
 
-module.exports = PinoColada
+module.exports = PinoGris
 
-function PinoColada () {
+function PinoGris () {
   return split(parse)
 
   function parse (line) {

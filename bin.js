@@ -1,8 +1,8 @@
 #! /usr/bin/env node
-var pinoColada = require('./')()
+var pinoGris = require('./')()
 var input = process.stdin
 var output = process.stdout
 
 input
-  .pipe(pinoColada)
+  .pipe(pinoGris)
   .pipe(output)
