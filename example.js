@@ -6,6 +6,15 @@ var log = pino({
 })
 
 log.fatal(new Error('Aaaaaauugh'), 'Someone is dead!')
+log.trace({
+  stack: (() => {
+    let arr = []
+    while (arr.length < 250) {
+      arr.push('😱')
+    }
+    return arr.join('\n')
+  })()
+}, 'Endless screaming detected')
 log.error(new Error('Perhaps we\'ll never know'), 'What really happened?')
 log.trace([
   'Colonel Mustard',

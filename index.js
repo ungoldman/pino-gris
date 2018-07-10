@@ -143,6 +143,7 @@ function PinoGris () {
   }
 
   function formatExtra (obj) {
+    const stackLimit = 100
     const pinoKeys = [
       'level',
       'time',
@@ -177,6 +178,12 @@ function PinoGris () {
     return nl + extraKeys.map(key => {
       let val = extra[key]
       if (isObject(val)) val = JSON.stringify(val, null, 2)
+      // limit extremely long stacktraces
+      if (key === 'stack' && val.split('\n').length > stackLimit) {
+        let arr = val.split('\n').slice(0, stackLimit)
+        arr.push(`(stack truncated at ${stackLimit} lines)`)
+        val = arr.join('\n')
+      }
       return chalk.gray(`${key}: ${val}`)
     }).join(nl)
   }
