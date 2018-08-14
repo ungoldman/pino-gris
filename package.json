@@ -1,7 +1,7 @@
 {
   "name": "pino-gris",
   "description": "verbose ndjson log formatter for pino",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Nate Goldman <ungoldman@gmail.com> (https://ungoldman.com/)",
   "bin": {
     "pino-gris": "./bin.js"
