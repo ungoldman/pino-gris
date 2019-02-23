@@ -2,6 +2,7 @@ var prettyBytes = require('prettier-bytes')
 var jsonParse = require('fast-json-parse')
 var prettyMs = require('pretty-ms')
 var padLeft = require('pad-left')
+var indent = require('indent')
 var split = require('split2')
 var chalk = require('chalk')
 var nl = '\n'
@@ -171,7 +172,7 @@ function formatExtra (obj) {
 
   if (extraKeys.length === 0) return ''
 
-  return nl + extraKeys.map(key => {
+  const content = nl + nl + extraKeys.map(key => {
     let val = extra[key]
     if (isObject(val)) val = JSON.stringify(val, null, 2)
 
@@ -182,7 +183,9 @@ function formatExtra (obj) {
       val = arr.join('\n')
     }
     return chalk.gray(`${key}: ${val}`)
-  }).join(nl)
+  }).join(nl) + nl
+
+  return indent(content, 2)
 }
 
 function isObject (val) {
