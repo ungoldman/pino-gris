@@ -41,17 +41,18 @@ an emoji, a message, and any extra data supplied in the first argument.
 > log.fatal(new Error('Aaaaaauugh'), 'Someone is dead!')
 
 13:14:32 💀 test Someone is dead!
-type: Error
-stack: Error: Aaaaaauugh
-    at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-    at Function.Module.runMain (module.js:693:10)
-    at startup (bootstrap_node.js:188:16)
-    at bootstrap_node.js:609:3
+
+  type: Error
+  stack: Error: Aaaaaauugh
+      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
+      at Module._compile (module.js:652:30)
+      at Object.Module._extensions..js (module.js:663:10)
+      at Module.load (module.js:565:32)
+      at tryModuleLoad (module.js:505:12)
+      at Function.Module._load (module.js:497:3)
+      at Function.Module.runMain (module.js:693:10)
+      at startup (bootstrap_node.js:188:16)
+      at bootstrap_node.js:609:3
 ```
 
 The main difference between this and [`pino-colada`][pino-colada] is that it will output _any_ key attached to the `pino` log object that isn't included in the following list:
@@ -90,44 +91,54 @@ For live sample output, try running `npm start` in this repo.
 > node example.js | ./bin.js
 
 13:14:32 💀 test Someone is dead!
-type: Error
-stack: Error: Aaaaaauugh
-    at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-    at Function.Module.runMain (module.js:693:10)
-    at startup (bootstrap_node.js:188:16)
-    at bootstrap_node.js:609:3
+
+  type: Error
+  stack: Error: Aaaaaauugh
+      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
+      at Module._compile (module.js:652:30)
+      at Object.Module._extensions..js (module.js:663:10)
+      at Module.load (module.js:565:32)
+      at tryModuleLoad (module.js:505:12)
+      at Function.Module._load (module.js:497:3)
+      at Function.Module.runMain (module.js:693:10)
+      at startup (bootstrap_node.js:188:16)
+      at bootstrap_node.js:609:3
+
 13:14:32 🚨 test What really happened?
-type: Error
-stack: Error: Perhaps we'll never know
-    at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:9:11)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-    at Function.Module.runMain (module.js:693:10)
-    at startup (bootstrap_node.js:188:16)
-    at bootstrap_node.js:609:3
+
+  type: Error
+  stack: Error: Perhaps we'll never know
+      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:9:11)
+      at Module._compile (module.js:652:30)
+      at Object.Module._extensions..js (module.js:663:10)
+      at Module.load (module.js:565:32)
+      at tryModuleLoad (module.js:505:12)
+      at Function.Module._load (module.js:497:3)
+      at Function.Module.runMain (module.js:693:10)
+      at startup (bootstrap_node.js:188:16)
+      at bootstrap_node.js:609:3
+
 13:14:32 🔍 test Interrogating suspects
-0: Colonel Mustard
-1: Miss Scarlet
-2: Mr. Green
-3: Mrs. Peacock
-4: Mrs. White
-5: Professor Plum
+
+  0: Colonel Mustard
+  1: Miss Scarlet
+  2: Mr. Green
+  3: Mrs. Peacock
+  4: Mrs. White
+  5: Professor Plum
+
 13:14:32 ⚠️  test Gathering evidence
-evidence: {
-  "weapon": "Candlestick",
-  "location": "Library",
-  "suspect": "Colonel Mustard"
-}
+
+  evidence: {
+    "weapon": "Candlestick",
+    "location": "Library",
+    "suspect": "Colonel Mustard"
+  }
+
 13:14:32 ✨ test Justice is served
-justice: true
+
+  justice: true
+
 ```
 
 ### Nota Bene
