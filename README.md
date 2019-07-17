@@ -141,6 +141,45 @@ For live sample output, try running `npm start` in this repo.
 
 ```
 
+### Verbose Mode
+
+For _extremely verbose_ formatted output, you can use the `-v` flag. This will print _all_ properties of the log object.
+
+A line like this...
+
+```js
+log.info({ justice: true }, 'Justice is served')
+```
+
+Whose raw output looks like this...
+
+```
+{"level":30,"time":1563400958346,"msg":"Justice is served","pid":3902,"hostname":"quant.hsd1.or.comcast.net","name":"test","justice":true,"v":1}
+```
+
+When fed to `pino-gris` like this...
+
+```sh
+output | pino-gris -v
+```
+
+Will be formatted like this:
+
+```
+14:59:23 ✨ test Justice is served
+
+  level: info
+  time: 1563400763379
+  msg: Justice is served
+  pid: 3737
+  hostname: quant.hsd1.or.comcast.net
+  name: test
+  justice: true
+  v: 1
+  message: Justice is served
+  ns:
+```
+
 ### Nota Bene
 
 Be careful how you use `pino`! It will do very different things depending on the order of arguments.
