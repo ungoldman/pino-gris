@@ -5,8 +5,8 @@ var padLeft = require('pad-left')
 var indent = require('indent')
 var split = require('split2')
 var chalk = require('chalk')
-var nl = '\n'
 
+var nl = '\n'
 var emojiLog = {
   warn: '⚠️',
   info: '✨',
@@ -35,10 +35,11 @@ var pinoKeys = [
   'contentLength',
   'url'
 ]
+var verbose = process.argv.includes('-v')
 
 module.exports = PinoGris
 
-function PinoGris (opts) {
+function PinoGris () {
   return split(parse)
 }
 
@@ -162,7 +163,10 @@ function formatMessageName (message) {
 
 function formatExtra (obj) {
   const extra = Object.keys(obj)
-    .filter(key => !pinoKeys.includes(key))
+    .filter(key => {
+      if (verbose) return true
+      return !pinoKeys.includes(key)
+    })
     .reduce((acc, key) => {
       acc[key] = obj[key]
       return acc
@@ -177,7 +181,7 @@ function formatExtra (obj) {
     if (isObject(val)) val = JSON.stringify(val, null, 2)
 
     // limit very long string values
-    if (typeof val === 'string' && val.split('\n').length > lineLimit) {
+    if (!verbose && typeof val === 'string' && val.split('\n').length > lineLimit) {
       let arr = val.split('\n').slice(0, lineLimit)
       arr.push(`(truncated at ${lineLimit} lines)`)
       val = arr.join('\n')
