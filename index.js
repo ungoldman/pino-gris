@@ -55,7 +55,6 @@ function parse (line) {
 }
 
 function convertLogNumber (obj) {
-  if (!obj.message) obj.message = obj.msg
   if (obj.level === 10) obj.level = 'trace'
   if (obj.level === 20) obj.level = 'debug'
   if (obj.level === 30) obj.level = 'info'
@@ -67,6 +66,7 @@ function convertLogNumber (obj) {
 function output (obj) {
   var output = []
 
+  if (!obj.message) obj.message = obj.msg
   if (!obj.level) obj.level = 'userlvl'
   if (!obj.name) obj.name = ''
   if (!obj.ns) obj.ns = ''
