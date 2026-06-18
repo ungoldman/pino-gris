@@ -27,7 +27,6 @@ const pinoKeys = new Set([
   'hostname',
   'name',
   'ns',
-  'v',
   'req',
   'res',
   'statusCode',
