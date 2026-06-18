@@ -1,23 +1,26 @@
-# pino-gris 🍇
+<div align="center">
 
-[![npm version][1]][2] [![build status][3]][4]
-[![downloads][5]][6] [![js-standard-style][7]][8]
+<img src="./logo.png" width="120" height="120" alt="grapes">
+
+# pino-gris
 
 A verbose [ndjson](http://ndjson.org) log formatter for [pino](https://github.com/pinojs/pino).
 
+[![npm][npm-image]][npm-url]
+[![build][build-image]][build-url]
+[![downloads][downloads-image]][npm-url]
+
+[npm-image]: https://img.shields.io/npm/v/pino-gris.svg
+[npm-url]: https://www.npmjs.com/package/pino-gris
+[build-image]: https://github.com/ungoldman/pino-gris/actions/workflows/tests.yml/badge.svg
+[build-url]: https://github.com/ungoldman/pino-gris/actions/workflows/tests.yml
+[downloads-image]: https://img.shields.io/npm/dm/pino-gris.svg
+
+</div>
+
 ![screenshot](./screenshot.png)
 
-[1]: https://img.shields.io/npm/v/pino-gris.svg?style=flat-square
-[2]: https://npmjs.org/package/pino-gris
-[3]: https://img.shields.io/travis/ungoldman/pino-gris/master.svg?style=flat-square
-[4]: https://travis-ci.org/ungoldman/pino-gris
-[5]: http://img.shields.io/npm/dm/pino-gris.svg?style=flat-square
-[6]: https://npmjs.org/package/pino-gris
-[7]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
-[8]: https://github.com/feross/standard
-
-**Note:** this is a fork of [`pino-colada`][pino-colada].
-The main difference is that `pino-gris` does more verbose logging of objects.
+> **Note**: this is a maintained fork of [`pino-colada`][pino-colada], with more verbose logging of objects and zero dependencies.
 
 ## Install
 
@@ -42,17 +45,11 @@ an emoji, a message, and any extra data supplied in the first argument.
 
 13:14:32 💀 test Someone is dead!
 
-  type: Error
-  stack: Error: Aaaaaauugh
-      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
-      at Module._compile (module.js:652:30)
-      at Object.Module._extensions..js (module.js:663:10)
-      at Module.load (module.js:565:32)
-      at tryModuleLoad (module.js:505:12)
-      at Function.Module._load (module.js:497:3)
-      at Function.Module.runMain (module.js:693:10)
-      at startup (bootstrap_node.js:188:16)
-      at bootstrap_node.js:609:3
+  err: {
+    "type": "Error",
+    "message": "Aaaaaauugh",
+    "stack": "Error: Aaaaaauugh\n    at ..."
+  }
 ```
 
 The main difference between this and [`pino-colada`][pino-colada] is that it will output _any_ key attached to the `pino` log object that isn't included in the following list:
@@ -67,7 +64,6 @@ const pinoKeys = [
   'hostname',
   'name',
   'ns',
-  'v',
   'req',
   'res',
   'statusCode',
@@ -88,37 +84,127 @@ This means error stack traces, objects, arrays, or anything else will get logged
 For live sample output, try running `npm start` in this repo.
 
 ```
-> node example.js | ./bin.js
+00:53:18 💀  test Someone is dead!
 
-13:14:32 💀 test Someone is dead!
+  err: {
+    "type": "Error",
+    "message": "Aaaaaauugh",
+    "stack": "Error: Aaaaaauugh\n    at file:///path/to/pino-gris/example.js:8:11\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)"
+  }
 
-  type: Error
-  stack: Error: Aaaaaauugh
-      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:8:11)
-      at Module._compile (module.js:652:30)
-      at Object.Module._extensions..js (module.js:663:10)
-      at Module.load (module.js:565:32)
-      at tryModuleLoad (module.js:505:12)
-      at Function.Module._load (module.js:497:3)
-      at Function.Module.runMain (module.js:693:10)
-      at startup (bootstrap_node.js:188:16)
-      at bootstrap_node.js:609:3
+00:53:18 🔍  test Endless screaming detected
 
-13:14:32 🚨 test What really happened?
+  stack: 😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  😱
+  (truncated at 100 lines)
 
-  type: Error
-  stack: Error: Perhaps we'll never know
-      at Object.<anonymous> (/Users/ng/dev/modules/pino-gris/example.js:9:11)
-      at Module._compile (module.js:652:30)
-      at Object.Module._extensions..js (module.js:663:10)
-      at Module.load (module.js:565:32)
-      at tryModuleLoad (module.js:505:12)
-      at Function.Module._load (module.js:497:3)
-      at Function.Module.runMain (module.js:693:10)
-      at startup (bootstrap_node.js:188:16)
-      at bootstrap_node.js:609:3
+00:53:18 🚨  test What really happened?
 
-13:14:32 🔍 test Interrogating suspects
+  err: {
+    "type": "Error",
+    "message": "Perhaps we'll never know",
+    "stack": "Error: Perhaps we'll never know\n    at file:///path/to/pino-gris/example.js:18:11\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)"
+  }
+
+00:53:18 🔍  test Interrogating suspects
 
   0: Colonel Mustard
   1: Miss Scarlet
@@ -127,7 +213,7 @@ For live sample output, try running `npm start` in this repo.
   4: Mrs. White
   5: Professor Plum
 
-13:14:32 ⚠️  test Gathering evidence
+00:53:18 ⚠️   test Gathering evidence
 
   evidence: {
     "weapon": "Candlestick",
@@ -135,7 +221,7 @@ For live sample output, try running `npm start` in this repo.
     "suspect": "Colonel Mustard"
   }
 
-13:14:32 ✨ test Justice is served
+00:53:18 ✨  test Justice is served
 
   justice: true
 
@@ -154,7 +240,7 @@ log.info({ justice: true }, 'Justice is served')
 Whose raw output looks like this...
 
 ```
-{"level":30,"time":1563400958346,"msg":"Justice is served","pid":3902,"hostname":"quant.hsd1.or.comcast.net","name":"test","justice":true,"v":1}
+{"level":30,"time":1563400958346,"pid":3902,"hostname":"example.local","name":"test","justice":true,"msg":"Justice is served"}
 ```
 
 When fed to `pino-gris` like this...
@@ -169,15 +255,12 @@ Will be formatted like this:
 14:59:23 ✨ test Justice is served
 
   level: info
-  time: 1563400763379
-  msg: Justice is served
-  pid: 3737
-  hostname: quant.hsd1.or.comcast.net
+  time: 1563400958346
+  pid: 3902
+  hostname: example.local
   name: test
   justice: true
-  v: 1
-  message: Justice is served
-  ns:
+  msg: Justice is served
 ```
 
 ### Nota Bene
@@ -189,14 +272,14 @@ Example:
 ```
 > log.error(new Error('error text'), 'message text')
 
-{"level":50,"time":1523650090921,"msg":"message text","pid":63152,"hostname":"quant.local","name":"test","type":"Error","stack":"Error: error text\n    at repl:1:9\n    at ContextifyScript.Script.runInThisContext (vm.js:50:33)\n    at REPLServer.defaultEval (repl.js:240:29)\n    at bound (domain.js:301:14)\n    at REPLServer.runBound [as eval] (domain.js:314:12)\n    at REPLServer.onLine (repl.js:468:10)\n    at emitOne (events.js:121:20)\n    at REPLServer.emit (events.js:211:7)\n    at REPLServer.Interface._onLine (readline.js:282:10)\n    at REPLServer.Interface._line (readline.js:631:8)","v":1}
+{"level":50,"time":1523650090921,"pid":63152,"hostname":"example.local","name":"test","err":{"type":"Error","message":"error text","stack":"Error: error text\n    at ..."},"msg":"message text"}
 
 > log.error('message text', new Error('error text'))
 
-{"level":50,"time":1523650105577,"msg":"message text {}","pid":63152,"hostname":"quant.local","name":"test","v":1}
+{"level":50,"time":1523650105577,"pid":63152,"hostname":"example.local","name":"test","msg":"message text"}
 ```
 
-In the first case above, the error's stack trace is merged onto the object, but the error's message is only visible in `stack`.
+In the first case above, the error is serialized under `err` (its type, message, and stack), and your message is kept in `msg`.
 
 In the second case above, the error's stack and message properties are completely lost!
 
@@ -205,22 +288,13 @@ So if you want to preserve any important information from an object, always pass
 Also note `pino` will do weird things with key collisions, like so:
 
 ```
-> log.trace({ v: 2 })
-{"level":10,"time":1523650319601,"pid":63152,"hostname":"quant.local","name":"test","v":2,"v":1}
+> log.info({ msg: 'inner' }, 'outer')
+{"level":30,"time":1523650319601,"pid":63152,"hostname":"example.local","name":"test","msg":"inner","msg":"outer"}
 ```
 
-Notice there are two `v` keys above now! 🤔
-
-## Related content
-- [pino-colada][pino-colada]
-- [pino](https://github.com/pinojs/pino)
-- [merry](https://github.com/shipharbor/merry)
-- [garnish](https://github.com/mattdesl/garnish)
-- [@studio/log](https://github.com/javascript-studio/studio-log)
-- [pino-http](https://github.com/pinojs/pino-http)
-- [hapi-pino](https://github.com/pinojs/hapi-pino)
-
-[pino-colada]: https://github.com/lrlna/pino-colada
+Notice there are two `msg` keys above now! 🤔
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
+
+[pino-colada]: https://github.com/lrlna/pino-colada
