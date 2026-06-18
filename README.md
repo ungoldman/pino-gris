@@ -18,8 +18,6 @@ A verbose [ndjson](http://ndjson.org) log formatter for [pino](https://github.co
 
 </div>
 
-![screenshot](./screenshot.png)
-
 > **Note**: this is a maintained fork of [`pino-colada`][pino-colada], with more verbose logging of objects and zero dependencies.
 
 ## Install
