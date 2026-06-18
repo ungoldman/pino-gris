@@ -1,6 +1,6 @@
-var pino = require('pino')
+import pino from 'pino'
 
-var log = pino({
+const log = pino({
   name: 'test',
   level: 'trace'
 })
