@@ -4,10 +4,12 @@ import { styleText } from 'node:util'
 export interface PinoGrisOptions {
   /** Show every field, skip the line-truncation limit on long string values. */
   verbose?: boolean
+  /** Cap long string values at this many lines (default 100); ignored when verbose. */
+  lineLimit?: number
 }
 
 const NL = '\n'
-const LINE_LIMIT = 100
+const DEFAULT_LINE_LIMIT = 100
 
 const emojiLog: Record<string, string> = {
   warn: '⚠️',
@@ -46,8 +48,7 @@ export function pinoGris(options: PinoGrisOptions = {}): Transform {
     transform(chunk, _encoding, callback) {
       buffer += chunk.toString()
       const lines = buffer.split(NL)
-      // split always yields at least one element, so pop is never undefined here;
-      // the last element is the trailing partial line, held until more data or flush
+      // split always yields >=1 element; the last is the partial line, held until flush
       buffer = lines.pop() as string
       for (const line of lines) this.push(parseLine(line, options))
       callback()
@@ -172,13 +173,17 @@ function formatExtra(obj: LogObject, options: PinoGrisOptions): string {
   const keys = Object.keys(obj).filter((key) => options.verbose || !pinoKeys.has(key))
   if (keys.length === 0) return ''
 
+  const limit = Number.isFinite(options.lineLimit)
+    ? (options.lineLimit as number)
+    : DEFAULT_LINE_LIMIT
+
   const lines = keys.map((key) => {
     const val = obj[key]
     let str = isPlainObject(val) ? JSON.stringify(val, null, 2) : String(val)
 
-    if (!options.verbose && str.split(NL).length > LINE_LIMIT) {
-      const head = str.split(NL).slice(0, LINE_LIMIT)
-      head.push(`(truncated at ${LINE_LIMIT} lines)`)
+    if (!options.verbose && str.split(NL).length > limit) {
+      const head = str.split(NL).slice(0, limit)
+      head.push(`(truncated at ${limit} lines)`)
       str = head.join(NL)
     }
     return styleText('gray', `${key}: ${str}`)

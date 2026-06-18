@@ -141,6 +141,27 @@ test('truncates long string extras unless verbose', async () => {
   assert.doesNotMatch(out, /line149/)
 })
 
+test('lineLimit overrides the default truncation point', async () => {
+  const big = Array.from({ length: 150 }, (_, i) => `line${i}`).join('\n')
+  const out = await run(line({ level: 'info', msg: 'm', dump: big }), { lineLimit: 10 })
+  assert.match(out, /truncated at 10 lines/)
+  assert.match(out, /line9/)
+  assert.doesNotMatch(out, /line10/)
+})
+
+test('lineLimit raises the truncation point above the default', async () => {
+  const big = Array.from({ length: 150 }, (_, i) => `line${i}`).join('\n')
+  const out = await run(line({ level: 'info', msg: 'm', dump: big }), { lineLimit: 200 })
+  assert.match(out, /line149/)
+  assert.doesNotMatch(out, /truncated/)
+})
+
+test('a non-finite lineLimit falls back to the default', async () => {
+  const big = Array.from({ length: 150 }, (_, i) => `line${i}`).join('\n')
+  const out = await run(line({ level: 'info', msg: 'm', dump: big }), { lineLimit: Number.NaN })
+  assert.match(out, /truncated at 100 lines/)
+})
+
 test('verbose shows all keys and skips truncation', async () => {
   const big = Array.from({ length: 150 }, (_, i) => `line${i}`).join('\n')
   const out = await run(line({ level: 'info', msg: 'm', pid: 123, dump: big }), { verbose: true })
