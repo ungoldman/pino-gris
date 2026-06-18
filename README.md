@@ -261,6 +261,17 @@ Will be formatted like this:
   msg: Justice is served
 ```
 
+### Line Limit
+
+Long string values are truncated at 100 lines by default. Use `--line-limit` to
+change the cap.
+
+```sh
+output | pino-gris --line-limit 500
+```
+
+The limit is ignored in verbose mode, which always prints everything.
+
 ### Nota Bene
 
 Be careful how you use `pino`! It will do very different things depending on the order of arguments.
