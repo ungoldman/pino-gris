@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/ungoldman/pino-gris/compare/v2.0.0...v2.1.0) (2026-06-18)
+
+
+### Features
+
+* add --line-limit option ([#6](https://github.com/ungoldman/pino-gris/issues/6)) ([eb9ea79](https://github.com/ungoldman/pino-gris/commit/eb9ea79b861f2af8a658e1ad412e25a00b43c0a4))
+
 ## [2.0.0](https://github.com/ungoldman/pino-gris/compare/v1.3.1...v2.0.0) (2026-06-18)
 
 
